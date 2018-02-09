@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Server Programming</title>
+	</head>
+	
+	<body>
+		<h1>Welcome to the Haaga-Helia!</h1>
+		<div th:each="list : ${studentList}">
+			<p th:text="${list.firstName} + ' ' + ${list.lastName}"></p>
+		</div>
+	</body>
+</html>
