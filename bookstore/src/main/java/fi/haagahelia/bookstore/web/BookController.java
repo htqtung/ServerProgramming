@@ -1,14 +1,18 @@
 package fi.haagahelia.bookstore.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import fi.haagahelia.bookstore.java.Book;
 import fi.haagahelia.bookstore.java.BookRepository;
+import fi.haagahelia.bookstore.java.Category;
 import fi.haagahelia.bookstore.java.CategoryRepository;
 
 @Controller
@@ -56,4 +60,21 @@ public class BookController {
 		return "editPage";
 	}
 	
+	//RESTful service to get all books
+	@RequestMapping(value="/books", method = RequestMethod.GET)
+	public @ResponseBody List<Book> bookListRest() {
+		return (List<Book>) repository.findAll();
+	}
+	
+	//RESTful service to get all books
+	@RequestMapping(value="/categories", method = RequestMethod.GET)
+	public @ResponseBody List<Category> categoryListRest() {
+		return (List<Category>) categoryRepository.findAll();
+	}
+	
+	//RESTful service to get student by ID
+	@RequestMapping(value="/book/{id}", method = RequestMethod.GET)
+	public @ResponseBody Book findBookRest(@PathVariable("id") Long bookId) {
+		return repository.findOne(bookId);
+	}
 }
